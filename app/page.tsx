@@ -5,6 +5,7 @@ export default function Home() {
   return (
     <div className="min-h-screen w-full flex justify-center items-center bg-black">
       {/*Hero Section*/}
+      <section>
       <div className="text-center space-y-5 max-w-2xl z-10">
         <p className="py-1 px-2 bg-zinc-900/40 backdrop-blur-sm font-light rounded-full text-white  inline-block">Reffer</p>
         <div className="space-y-3 ">
@@ -21,6 +22,14 @@ export default function Home() {
           <Button variant="secondary" className="rounded-lg">Search Referrals</Button>
         </div>
       </div>
+      </section>
+
+      {/* Features Section */}
+      <section>
+        <div className="">
+          <h1></h1>
+        </div>
+      </section>
     </div>
   );
 }
