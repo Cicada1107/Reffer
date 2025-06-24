@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import FeatureGrid from "@/components/ui/feature_grid";
 import GlowingParticlesSection from "@/components/ui/glowing_particles";
+import { MarqueeDemo } from "@/components/ui/marquee";
 import Image from "next/image";
 
 export default function Home() {
@@ -33,10 +34,16 @@ export default function Home() {
         <FeatureGrid />
       </section>
 
+      {/* Company showcase */}
+      <section className="mt-10 w-full h-[300px] px-auto">
+        <MarqueeDemo/>
+      </section>
+
       {/* Call To Action */}
-      <section className="mt-30 w-full h-full px-auto">
+      <section className="mt-50 w-full h-full px-auto">
         <GlowingParticlesSection/>
       </section>
+
     </div>
   );
 }
