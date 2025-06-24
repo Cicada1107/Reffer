@@ -1,8 +1,8 @@
 'use client'
 
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card"
 import FeatureGrid from "@/components/ui/feature_grid";
+import GlowingParticlesSection from "@/components/ui/glowing_particles";
 import Image from "next/image";
 
 export default function Home() {
@@ -31,6 +31,11 @@ export default function Home() {
       {/* Features Section */}
       <section className="mt-30 w-full h-full px-auto">
         <FeatureGrid />
+      </section>
+
+      {/* Call To Action */}
+      <section className="mt-30 w-full h-full px-auto">
+        <GlowingParticlesSection/>
       </section>
     </div>
   );

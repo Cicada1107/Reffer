@@ -45,7 +45,7 @@ const features = [
   {
     icon: <BookOpen className="w-6 h-6 text-white" />,
     title: "Simple & Efficient",
-    description: "Save your efforts and energy. Simple UI and flow logic.",
+    description: "Save your efforts and energy. Intuitive UI and flow logic.",
   },
   {
     icon: <Search className="w-6 h-6 text-white" />,
