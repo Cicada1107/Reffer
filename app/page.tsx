@@ -1,32 +1,11 @@
+'use client'
+
 import { Button } from "@/components/ui/button";
-import { Carousel } from "@/components/ui/carousel";
+import { Card, CardContent } from "@/components/ui/card"
+import FeatureGrid from "@/components/ui/feature_grid";
 import Image from "next/image";
 
 export default function Home() {
-  const slidesData = [
-    {
-      title: "Mystic Mountains",
-      button: "Explore Component",
-      src: "https://images.unsplash.com/photo-1494806812796-244fe51b774d?q=80&w=3534&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-      title: "Urban Dreams",
-      button: "Explore Component",
-      src: "https://images.unsplash.com/photo-1518710843675-2540dd79065c?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-      title: "Neon Nights",
-      button: "Explore Component",
-      src: "https://images.unsplash.com/photo-1590041794748-2d8eb73a571c?q=80&w=3456&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-      title: "Desert Whispers",
-      button: "Explore Component",
-      src: "https://images.unsplash.com/photo-1679420437432-80cfbf88986c?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-  ];
-
-
   return (
     <div className="pt-40 min-h-screen w-full flex flex-col items-center bg-black">
       {/*Hero Section*/}
@@ -50,8 +29,8 @@ export default function Home() {
       </section>
 
       {/* Features Section */}
-      <section className="w-full mt-30 bg-black">
-        <Carousel slides={slidesData}/>
+      <section className="mt-30 w-full h-full px-auto">
+        <FeatureGrid />
       </section>
     </div>
   );
