@@ -53,7 +53,7 @@ const GlowingParticlesSection = () => {
 
 
   return (
-    <div className="relative py-40 w-full h-[400px] overflow-hidden">
+    <div className="relative py-60 w-full h-[400px] overflow-hidden">
       <canvas
         ref={canvasRef}
         className="absolute top-0 left-0 w-[100%] h-full"

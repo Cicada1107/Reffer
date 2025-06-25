@@ -1,8 +1,11 @@
 import { AuroraBackground } from "@/components/ui/aurora-background";
+// import { FAQSection } from "@/components/ui/faq-section";
 import FeatureGrid from "@/components/ui/feature_grid";
 import GlowingParticlesSection from "@/components/ui/glowing_particles";
 import { Hero } from "@/components/ui/hero";
 import { MarqueeDemo } from "@/components/ui/marquee";
+import GuideSection from "@/components/ui/guide-section";
+
 
 export default function Home() {
   return (
@@ -10,9 +13,11 @@ export default function Home() {
     <AuroraBackground> 
       <div className="min-h-screen w-full flex flex-col items-center p-3 bg-black">
         <Hero/>
-        <FeatureGrid/>
+        <FeatureGrid />
+        <GuideSection />
         <GlowingParticlesSection />
-        <MarqueeDemo/>
+        <MarqueeDemo />
+        {/* <FAQSection/> */}
       </div>
     </AuroraBackground>
   );
