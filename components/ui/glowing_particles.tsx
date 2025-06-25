@@ -53,15 +53,15 @@ const GlowingParticlesSection = () => {
 
 
   return (
-    <div className="relative w-full h-[400px] overflow-hidden">
+    <div className="relative py-40 w-full h-[400px] overflow-hidden">
       <canvas
         ref={canvasRef}
         className="absolute top-0 left-0 w-[100%] h-full"
       ></canvas>
 
       {/* Overlay content */}
-      <div className="relative z-10 flex items-center justify-center h-full text-center">
-        <div className="text-white space-y-3">
+      <div className="relative z-10 flex items-center justify-center h-full text-center px-4">
+        <div className="text-white space-y-3 max-w-screen-md">
           <h2 className="text-3xl font-bold">No Nonsense. Search. Scroll. Tap.</h2>
           <p className="text-gray-300">
             Time is a luxury. Spend it where it matters.

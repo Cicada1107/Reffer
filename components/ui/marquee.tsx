@@ -77,10 +77,11 @@ const ReviewCard = ({
 
 export function MarqueeDemo() {
   return (
-    <div className="relative w-full py-16 overflow-hidden bg-black">
-      <h2 className="text-xl md:text-2xl font-semibold text-white text-center mb-10">
+    <div className="relative w-full py-40 overflow-hidden">
+      <h2 className="text-3xl font-bold text-white text-center mb-10">
         Loved by job seekers
       </h2>
+
 
       {/* Marquee Rows */}
       <div className="relative z-10">
