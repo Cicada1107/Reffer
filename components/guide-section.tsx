@@ -1,9 +1,9 @@
 'use client'
 
-import ChatAnimation from "./chat-animation";
-import RequestAnimation from "./request-referral-animation";
-import SearchAnimation from "./search_animation";
-import SendRequestAnimation from "./send_request_animation";
+import ChatAnimation from "./ui/chat-animation";
+import RequestAnimation from "./ui/request-referral-animation";
+import SearchAnimation from "./ui/search_animation";
+import SendRequestAnimation from "./ui/send_request_animation";
 
 export default function GuideSection() {
     return (

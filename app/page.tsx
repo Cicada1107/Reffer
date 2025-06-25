@@ -1,10 +1,9 @@
 import { AuroraBackground } from "@/components/ui/aurora-background";
-// import { FAQSection } from "@/components/ui/faq-section";
-import FeatureGrid from "@/components/ui/feature_grid";
+import FeatureGrid from "@/components/feature_grid";
 import GlowingParticlesSection from "@/components/ui/glowing_particles";
-import { Hero } from "@/components/ui/hero";
+import { Hero } from "@/components/hero";
 import { MarqueeDemo } from "@/components/ui/marquee";
-import GuideSection from "@/components/ui/guide-section";
+import GuideSection from "@/components/guide-section";
 
 
 export default function Home() {
