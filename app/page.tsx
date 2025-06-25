@@ -16,7 +16,6 @@ export default function Home() {
         <GuideSection />
         <GlowingParticlesSection />
         <MarqueeDemo />
-        {/* <FAQSection/> */}
       </div>
     </AuroraBackground>
   );
