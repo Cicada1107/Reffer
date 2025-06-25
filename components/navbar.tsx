@@ -30,7 +30,7 @@ export default function Navbar() {
             {/* Navigation */}
             <nav className="hidden md:flex absolute left-1/2 -translate-x-1/2 text-sm font-medium text-white/80">
               <div className='flex items-center gap-5 py-2 px-4 rounded-full bg-black/10 backdrop-blur-md border border-zinc-600 text-white'>
-                  <Link href="#">Search</Link>
+                  <Link href="#">Search Referrals</Link>
                   <Link href="#">Sent Requests</Link>
                   <Link href="#">Received Requests</Link>
               </div>
