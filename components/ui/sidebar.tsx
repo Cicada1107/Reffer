@@ -39,8 +39,8 @@ export function Sidebar({ onClose }: { onClose: () => void }) {
             <SidebarItem text="Received Requests" icon={<ReceivedReqIcon/>} link="#"/>
         </div>
         <div className="flex flex-col items-center justify-center gap-1">
-            <SidebarItem text="Arijit Dubey" icon={<GitHubIcon/>} link="https://github.com/Cicada1107"/>
             <SidebarItem text="Support Website" icon={<RupeeIcon/>} link="#"/>
+            <SidebarItem text="Arijit Dubey" icon={<GitHubIcon/>} link="https://github.com/Cicada1107"/>
         </div>
     </div>
 }
