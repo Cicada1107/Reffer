@@ -10,6 +10,9 @@ const inter = Inter({subsets: ['latin']});
 export const metadata: Metadata = {
   title: "Reffer",
   description: "Referral Finding Website Created by Arijit Dubey",
+  icons: {
+    icon: '/favicon.ico',
+  },
 };
 
 export default function RootLayout({

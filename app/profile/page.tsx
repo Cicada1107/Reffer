@@ -3,10 +3,10 @@
 import UserDetails from "@/components/user_details";
 import { Skeleton } from "@/components/ui/skeleton"
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation"; // Fixed import
+import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
-export default function ProfilePage() { // Better name
+export default function ProfilePage() {
   const { data: session, status } = useSession();
   const router = useRouter();
 

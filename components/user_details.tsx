@@ -318,7 +318,7 @@ export default function UserDetails({ user }: PersonalDetailsProps) {
       {/* Job Details Card */}
       <div className="w-full flex mt-2 items-center rounded-lg shadow-md backdrop-blur-md bg-white/10 border border-white/10 p-4">
         <div className="sm:w-3/4 w-full flex flex-col p-1">
-          <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center justify-between mb-4 px-2">
             <h1 className="text-left font-bold text-white text-2xl">Job Details</h1>
             <button
               onClick={() => editingJob ? cancelJobEdit() : setEditingJob(true)}
