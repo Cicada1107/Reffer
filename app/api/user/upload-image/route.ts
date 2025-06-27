@@ -1,7 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
-import { writeFile, mkdir } from 'fs/promises';
-import path from 'path';
+import { v2 as cloudinary } from 'cloudinary';
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 export async function POST(request: NextRequest) {
   try {
@@ -24,20 +29,33 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Invalid file type' }, { status: 400 });
     }
 
-    // Create uploads directory if it doesn't exist
-    const uploadsDir = path.join(process.cwd(), 'public', 'uploads', 'avatars');
-    await mkdir(uploadsDir, { recursive: true });
-
-    // Generate unique filename
-    const fileName = `${userId}-${Date.now()}.${file.name.split('.').pop()}`;
-    const filePath = path.join(uploadsDir, fileName);
-
     // Convert file to buffer and save
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
-    await writeFile(filePath, buffer);
 
-    const imageUrl = `/uploads/avatars/${fileName}`;
+    //uploading to cloudinary using a promisified version of its by-default-callback-based upload_stream method 
+    const uploadResult = await new Promise((resolve, reject) => {
+      cloudinary.uploader.upload_stream(
+        {
+          resource_type: 'image',
+          folder: 'avatars',
+          public_id: `${userId}-${Date.now()}`,
+          transformation: [
+            {
+              width: 400,
+              height: 400,
+              crop: 'fill'
+            }
+          ]
+        },
+        (error, result) => {
+          if(error) reject(error);
+          else resolve(result);
+        }
+      ).end(buffer);
+    })
+
+    const imageUrl = (uploadResult as any).secure_url;
 
     // Here you would typically update the database with the new image URL
     // await db.user.update({

@@ -1,7 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
-import { writeFile, mkdir } from 'fs/promises';
-import path from 'path';
+import { v2 as cloudinary } from 'cloudinary';
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
 
 export async function POST(request: NextRequest) {
   try {
@@ -29,20 +35,26 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'File size exceeds 5MB' }, { status: 400 });
     }
 
-    // Create uploads directory if it doesn't exist
-    const uploadsDir = path.join(process.cwd(), 'public', 'uploads', 'resumes');
-    await mkdir(uploadsDir, { recursive: true });
-
-    // Generate unique filename
-    const fileName = `${userId}-resume-${Date.now()}.pdf`;
-    const filePath = path.join(uploadsDir, fileName);
-
     // Convert file to buffer and save
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
-    await writeFile(filePath, buffer);
+    
+    //uploading to cloudinary using a promisified version of its by-default-callback-based upload_stream method 
+    const uploadResult = await new Promise((resolve, reject) => {
+      cloudinary.uploader.upload_stream(
+        {
+          resource_type: 'raw',
+          folder: 'resumes',
+          public_id: `${userId}-resume-${Date.now()}`,
+        },
+        (error, result) => {
+          if(error) reject(error);
+          else resolve(result);
+        }
+      ).end(buffer);
+    })
 
-    const resumeUrl = `/uploads/resumes/${fileName}`;
+    const resumeUrl = (uploadResult as any).secure_url;
 
     // Here you would typically update the database with the new resume URL
     // await db.user.update({

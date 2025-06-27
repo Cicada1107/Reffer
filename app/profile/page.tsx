@@ -31,13 +31,9 @@ export default function ProfilePage() {
     )
   }
 
-  if (!session) {
-    return null;
-  }
-
   return (
     <div className="w-full mt-15 min-h-screen flex flex-col items-center p-3 bg-black">
-      <UserDetails user={session.user} />
+      <UserDetails user={session?.user} />
     </div>
   );
 }

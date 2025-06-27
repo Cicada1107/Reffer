@@ -51,6 +51,7 @@ export async function PUT(request: NextRequest) {
     }
 
     // Verify the user can only update their own profile
+    //@ts-ignore
     if (session.user.id !== userId) {
       return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
     }
