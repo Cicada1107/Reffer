@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { v2 as cloudinary } from 'cloudinary';
+import { prisma } from '@/lib/prisma';
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -56,11 +57,13 @@ export async function POST(request: NextRequest) {
 
     const resumeUrl = (uploadResult as any).secure_url;
 
-    // Here you would typically update the database with the new resume URL
-    // await db.user.update({
-    //   where: { id: userId },
-    //   data: { resumeUrl: resumeUrl }
-    // });
+    //pushing the resume url to the db
+    await prisma.user.update({
+          where: {id: userId},
+          data: {
+            resumeUrl: resumeUrl
+          }
+        });
 
     return NextResponse.json({ resumeUrl });
   } catch (error) {

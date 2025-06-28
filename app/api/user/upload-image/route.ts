@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { v2 as cloudinary } from 'cloudinary';
+import { prisma } from '@/lib/prisma';
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -57,11 +58,14 @@ export async function POST(request: NextRequest) {
 
     const imageUrl = (uploadResult as any).secure_url;
 
-    // Here you would typically update the database with the new image URL
-    // await db.user.update({
-    //   where: { id: userId },
-    //   data: { image: imageUrl }
-    // });
+    //Now gotta save this url to the db hehe
+    //hey fellow coder reading my code this took me some time to crack so I'm happy
+    await prisma.user.update({
+      where: {id: userId},
+      data: {
+        image: imageUrl
+      }
+    });
 
     return NextResponse.json({ imageUrl });
   } catch (error) {

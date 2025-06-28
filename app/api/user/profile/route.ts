@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
+import { prisma } from '@/lib/prisma';
 
 export async function GET(request: NextRequest) {
   try {
@@ -16,17 +17,24 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: 'User ID required' }, { status: 400 });
     }
 
-    // Replace with actual database query
-    const userProfile = {
-      phone: '+1234567890',
-      college: 'Sample University',
-      branch: 'Computer Science',
-      degree: 'Bachelor of Technology',
-      company: 'Tech Corp',
-      role: 'Software Engineer',
-      linkedin: 'https://linkedin.com/in/user',
-      resumeUrl: null
-    };
+    //Fetch from db
+    const userProfile = await prisma.user.findUnique({
+      where: {id: userId},
+      select: {
+        phone: true,
+        college: true,
+        branch: true,
+        degree: true,
+        company: true,
+        role: true,
+        linkedin: true,
+        resumeUrl: true
+      }
+    });
+
+    if(!userProfile){
+      return NextResponse.json({ error: 'User not found' }, { status: 404 });
+    }
 
     return NextResponse.json(userProfile);
   } catch (error) {
@@ -55,22 +63,21 @@ export async function PUT(request: NextRequest) {
     if (session.user.id !== userId) {
       return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
     }
-
-    // Replace with actual database update
-    const updatedProfile = {
-      id: userId,
-      name: session.user.name,
-      email: session.user.email,
-      image: session.user.image,
-      phone,
-      college,
-      branch,
-      degree,
-      company,
-      role,
-      linkedin,
-      resumeUrl
-    };
+    
+    //Update user profile in db hehe boi
+    const updatedProfile = await prisma.user.update({
+      where: { id: userId },
+      data: {
+        phone,
+        college,
+        branch,
+        degree,
+        company,
+        role,
+        linkedin,
+        resumeUrl
+      }
+    });
 
     return NextResponse.json(updatedProfile);
   } catch (error) {
