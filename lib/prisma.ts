@@ -1,6 +1,6 @@
 //Singleton instance of prismaClient - to avoid excessive hits to prismaClient aur uske karan ban/whatever
 
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient } from './generated/prisma'
 
 const globalForPrisma = globalThis as unknown as {
   prisma: PrismaClient | undefined

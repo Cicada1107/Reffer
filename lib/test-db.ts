@@ -14,3 +14,5 @@ export async function testDatabaseConnection() {
     console.error('❌ Database connection failed:', error);
   }
 }
+
+testDatabaseConnection();
