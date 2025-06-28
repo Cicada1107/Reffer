@@ -1,0 +1,129 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+//Models - Authentication & Profile related
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  image         String?
+  
+  // Profile fields matching your UserProfile interface
+  college       String?
+  branch        String?
+  phone         String?
+  degree        String?
+  company       String?
+  role          String?
+  linkedin      String?
+  resumeUrl     String?
+  
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  referralRequestsSent        ReferralRequest[] @relation("RequestsSent")
+  referralRequestsReceived    ReferralRequest[] @relation("RequestsReceived")
+
+  messagesSent        Message[] @relation("MessageSender")
+  messagesReceived    Message[] @relation("MessageReceiver")
+
+  
+  accounts      Account[]
+  sessions      Session[]
+}
+
+
+//Models - feature related
+model ReferralRequest {
+  id            String @id @default(cuid())
+  requesterId   String //id of the user who sent the request
+  employeeId    String //id of user to whome the request was sent
+  jobID         String //JobID supplied by user in search
+  status        RequestStatus @default(PENDING)
+  chat          Chat?
+
+  requester      User @relation("RequestsSent", fields: [requesterId], references: [id])
+  employee       User @relation("RequestsReceived", fields: [employeeId], references: [id])
+
+}
+
+model Chat {
+  id                  String @id @default(cuid())
+  referralRequestId   String @unique
+  
+  isActive            Boolean @default(true)
+  
+  referralRequest     ReferralRequest @relation(fields: [referralRequestId], references: [id])
+  messages            Message[]
+  
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+}
+
+model Message {
+  id          String @id @default(cuid())
+  chatId      String
+  senderId    String
+  receiverId  String
+  content     String @db.Text
+  
+  chat     Chat @relation(fields: [chatId], references: [id])
+  sender   User @relation("MessageSender", fields: [senderId], references: [id])
+  receiver User @relation("MessageReceiver", fields: [receiverId], references: [id])
+  
+  createdAt DateTime @default(now())
+}
+
+enum RequestStatus {
+  PENDING
+  CONCLUDED
+}
