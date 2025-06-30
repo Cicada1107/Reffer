@@ -1,4 +1,5 @@
 import { Button } from "./ui/button"
+import Link from "next/link"
 
 export function Hero() {
     return (
@@ -14,8 +15,12 @@ export function Hero() {
             </p>
 
             <div className="space-x-3">
-                <Button variant="default" className="rounded-lg">Start Now</Button>
-                <Button variant="secondary" className="rounded-lg">Search Referrals</Button>
+                <Link href="/search">
+                    <Button variant="default" className="rounded-lg">Start Now</Button>
+                </Link>
+                <Link href="/search">
+                    <Button variant="secondary" className="rounded-lg">Search Referrals</Button>
+                </Link>
             </div>
         </div>
     )

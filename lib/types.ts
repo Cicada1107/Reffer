@@ -14,3 +14,9 @@ export interface UserProfile {
   createdAt?: Date;
   updatedAt?: Date;
 }
+
+export interface SearchParams {
+  company: string;
+  role: string;
+  jobId?: string;
+}
