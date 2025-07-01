@@ -44,7 +44,7 @@ export default function UserCard({ user, jobId }: UserCardProps) {
   return (
     <div className="bg-white/10 backdrop-blur-md border border-white/10 rounded-lg p-6 hover:bg-white/15 transition-colors">
       {/* Profile Section */}
-      <div className="flex items-center space-x-4 mb-4">
+      <div className="flex items-center space-x-4 mb-4 ">
         <img
           src={user.image || '/default-avatar.png'}
           alt={user.name || 'User'}
@@ -52,7 +52,13 @@ export default function UserCard({ user, jobId }: UserCardProps) {
         />
         <div>
           <h3 className="text-lg font-semibold text-white">{user.name}</h3>
-          <p className="text-gray-400 text-sm">{user.email}</p>
+          <p
+            className="text-gray-400 text-sm break-all hover:underline"
+          >
+            <a href={`mailto:${user.email}`} className="break-all">
+              {user.email}
+            </a>
+          </p>
         </div>
       </div>
 

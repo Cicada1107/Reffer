@@ -6,6 +6,8 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
+//todo - add two sections: Pending requests, Concluded requests. (each show chats with other peole with the corresponding status of the request object)
+
 export default function ProfilePage() {
   const { data: session, status } = useSession();
   const router = useRouter();

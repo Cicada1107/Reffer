@@ -19,7 +19,7 @@ export default function SearchPage() {
 
   const handleSearch = async () => {
     if (!searchParams.company.trim() || !searchParams.role.trim()) {
-      alert('Please enter both company and role');
+      alert('Please enter atleast company and role');
       return;
     }
 
@@ -57,7 +57,7 @@ export default function SearchPage() {
       <div className="max-w-4xl mx-auto">
         {/* Search Form */}
         <div className="bg-white/10 backdrop-blur-md border border-white/10 rounded-lg p-6 mb-8">
-          <h1 className="text-3xl font-bold mb-6 text-center">Search for Referrals</h1>
+          <h1 className="text-3xl font-bold mb-6 text-center">Search for Employees</h1>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
             <div>
@@ -103,7 +103,7 @@ export default function SearchPage() {
 
         {/* Search Results */}
         {hasSearched && (
-          <div>
+          <div className='py-5'>
             <h2 className="text-2xl font-semibold mb-4">
               Search Results ({results.length} found)
             </h2>
