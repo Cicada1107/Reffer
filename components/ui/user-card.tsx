@@ -2,8 +2,9 @@
 
 import { useState } from 'react';
 import { Button } from './button';
-import { MapPin, Building, Briefcase, MessageCircle } from 'lucide-react';
+import { MapPin, Building, Briefcase, MessageCircle, Send } from 'lucide-react';
 import { UserProfile } from '@/lib/types';
+import { useRouter } from 'next/navigation';
 
 interface UserCardProps {
   user: UserProfile;
@@ -12,6 +13,9 @@ interface UserCardProps {
 
 export default function UserCard({ user, jobId }: UserCardProps) {
   const [requesting, setRequesting] = useState(false);
+  const [ hasRequested, setHasRequested ] = useState(false);
+  const [ chatId, setChatId ] = useState<string | null>(null);
+  const router = useRouter();
 
   const handleRequestReferral = async () => {
     setRequesting(true);
@@ -29,15 +33,25 @@ export default function UserCard({ user, jobId }: UserCardProps) {
       });
 
       if (response.ok) {
+        const result = await response.json();
         alert('Referral request sent successfully!');
+        setChatId(result.data.chatId);
+        setHasRequested(true);
       } else {
-        alert('Failed to send referral request');
+        const errorData = await response.json();
+        alert(errorData.error || 'Failed to send referral request');
       }
     } catch (error) {
       console.error('Error sending request:', error);
       alert('Error sending referral request');
     } finally {
       setRequesting(false);
+    }
+  };
+
+  const handleChatClick = () => {
+    if(chatId){
+      router.push(`/chat/${chatId}`);
     }
   };
 
@@ -87,22 +101,25 @@ export default function UserCard({ user, jobId }: UserCardProps) {
       </div>
 
       {/* Actions */}
-      <div className="flex space-x-2">
-        <Button
-          onClick={handleRequestReferral}
-          disabled={requesting}
-          className="flex-1 bg-purple-600 hover:bg-purple-700"
-        >
-          {requesting ? 'Sending...' : 'Request Referral'}
-        </Button>
-        
-        <Button
-          variant="secondary"
-          className="px-3"
-          title="Chat"
-        >
-          <MessageCircle className="w-4 h-4" />
-        </Button>
+      <div className="flex items-center">
+        {!hasRequested ? (
+          <Button
+            onClick={handleRequestReferral}
+            disabled={requesting}
+            className="flex-1 bg-purple-600 hover:bg-purple-700"
+          >
+            <Send className='w-4 h-4' /> {requesting ? 'Sending...' : 'Request Referral'}
+          </Button>
+        ) : (
+          <Button
+            onClick={handleChatClick}
+            className="flex-1 bg-gray-600 hover:bg-gray-700"
+            title="Chat with this employee"
+          >
+            <MessageCircle className="w-4 h-4 mr-2" />
+            Chat
+          </Button>
+        )}
       </div>
     </div>
   );
