@@ -1,10 +1,9 @@
 'use client'
 
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Send, ArrowLeft, MoreVertical, Phone, Video } from "lucide-react";
+import { Send, ArrowLeft, MoreVertical, Phone, Video, User } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState, useRef } from "react";
@@ -29,7 +28,7 @@ export default function chatPage(){
 
     //getting current logged in user & the chat id
     const {data: session} = useSession();
-    const chatId = useParams().chatId;
+    const chatId = useParams()?.chatId;
     const router = useRouter();
     const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -39,7 +38,6 @@ export default function chatPage(){
     const [newMessage, setNewMessage] = useState('');
     const [chatData, setChatData] = useState<any>(null);
     const [loading, setLoading] = useState(true);
-    const [isTyping, setIsTyping] = useState(false);
 
     // Auto scroll to bottom when new messages arrive
     const scrollToBottom = () => {
@@ -140,6 +138,12 @@ export default function chatPage(){
 
     const otherParticipant = getOtherParticipant();
 
+    const handleProfileClick = () => {
+        if (otherParticipant) {
+            router.push(`/user/${otherParticipant.id}`);
+        }
+    };
+
     if(loading){
         return (
             <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 text-white pt-20">
@@ -189,13 +193,18 @@ export default function chatPage(){
                                 </Button>
                                 
                                 <div className="flex items-center space-x-3">
-                                    <div className="relative">
+                                    <div className="relative group">
                                         <img
                                             src={otherParticipant?.image || '/default-avatar.png'}
                                             alt={otherParticipant?.name || 'User'}
-                                            className="w-12 h-12 rounded-full border-2 border-purple-500/30 shadow-lg"
+                                            className="w-12 h-12 rounded-full border-2 border-purple-500/30 shadow-lg cursor-pointer hover:border-purple-500/60 transition-colors"
+                                            onClick={handleProfileClick}
+                                            title="View profile"
                                         />
                                         <div className="absolute bottom-0 right-0 w-3 h-3 bg-green-400 rounded-full border-2 border-gray-900"></div>
+                                        <div className="absolute inset-0 bg-black/50 rounded-full opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                            <User className="w-4 h-4 text-white" />
+                                        </div>
                                     </div>
                                     
                                     <div>
@@ -263,11 +272,18 @@ export default function chatPage(){
                                         {/* Avatar */}
                                         <div className="flex-shrink-0">
                                             {showAvatar ? (
-                                                <img
-                                                    src={message.sender.image || '/default-avatar.png'}
-                                                    alt={message.sender.name}
-                                                    className="w-8 h-8 rounded-full border border-gray-700"
-                                                />
+                                                <div className="relative group">
+                                                    <img
+                                                        src={message.sender.image || '/default-avatar.png'}
+                                                        alt={message.sender.name}
+                                                        className="w-8 h-8 rounded-full border border-gray-700 cursor-pointer hover:border-purple-500/50 transition-colors"
+                                                        onClick={() => router.push(`/user/${message.sender.id}`)}
+                                                        title="View profile"
+                                                    />
+                                                    <div className="absolute inset-0 bg-black/50 rounded-full opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                                        <User className="w-3 h-3 text-white" />
+                                                    </div>
+                                                </div>
                                             ) : (
                                                 <div className="w-8 h-8"></div>
                                             )}

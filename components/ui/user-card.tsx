@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { Button } from './button';
-import { MapPin, Building, Briefcase, MessageCircle, Send } from 'lucide-react';
+import { MapPin, Building, Briefcase, MessageCircle, Send, User } from 'lucide-react';
 import { UserProfile } from '@/lib/types';
 import { useRouter } from 'next/navigation';
 
@@ -55,20 +55,32 @@ export default function UserCard({ user, jobId }: UserCardProps) {
     }
   };
 
+  const handleProfileClick = () => {
+    console.log('Profile clicked for user:', user.id);
+    router.push(`/user/${user.id}`);
+  };
+
   return (
     <div className="bg-white/10 backdrop-blur-md border border-white/10 rounded-lg p-6 hover:bg-white/15 transition-colors">
       {/* Profile Section */}
       <div className="flex items-center space-x-4 mb-4 ">
-        <img
-          src={user.image || '/default-avatar.png'}
-          alt={user.name || 'User'}
-          className="w-16 h-16 rounded-full border-2 border-white/20"
-        />
+        <div 
+          className="relative group cursor-pointer"
+          onClick={handleProfileClick}
+          title="View profile"
+        >
+          <img
+            src={user.image || '/default-avatar.png'}
+            alt={user.name || 'User'}
+            className="w-16 h-16 rounded-full border-2 border-white/20 hover:border-purple-500/50 transition-colors"
+          />
+          <div className="absolute inset-0 bg-black/50 rounded-full opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
+            <User className="w-6 h-6 text-white" />
+          </div>
+        </div>
         <div>
           <h3 className="text-lg font-semibold text-white">{user.name}</h3>
-          <p
-            className="text-gray-400 text-sm break-all hover:underline"
-          >
+          <p className="text-gray-400 text-sm break-all hover:underline">
             <a href={`mailto:${user.email}`} className="break-all">
               {user.email}
             </a>
