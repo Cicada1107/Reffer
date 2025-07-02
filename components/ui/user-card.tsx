@@ -117,7 +117,7 @@ export default function UserCard({ user, jobId }: UserCardProps) {
             title="Chat with this employee"
           >
             <MessageCircle className="w-4 h-4 mr-2" />
-            Chat
+            <span className='font-medium text-white'>Chat</span>
           </Button>
         )}
       </div>
