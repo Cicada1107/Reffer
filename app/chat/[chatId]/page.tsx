@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Send, ArrowLeft, MoreVertical, Phone, Video, User } from "lucide-react";
+import { Send, ArrowLeft, MoreVertical, Phone, Video, User, CheckCircle } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState, useRef } from "react";
@@ -38,6 +38,7 @@ export default function chatPage(){
     const [newMessage, setNewMessage] = useState('');
     const [chatData, setChatData] = useState<any>(null);
     const [loading, setLoading] = useState(true);
+    const [concluding, setConcluding] = useState(false);
 
     // Auto scroll to bottom when new messages arrive
     const scrollToBottom = () => {
@@ -144,6 +145,43 @@ export default function chatPage(){
         }
     };
 
+    const handleConcludeRequest = async () => {
+        if (!chatData?.referralRequest?.id) return;
+
+        setConcluding(true);
+        try {
+            const response = await fetch('/api/referral/conclude', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    referralRequestId: chatData.referralRequest.id,
+                }),
+            });
+
+            if (response.ok) {
+                // Update the local chat data to reflect the concluded status
+                setChatData(prev => ({
+                    ...prev,
+                    referralRequest: {
+                        ...prev.referralRequest,
+                        status: 'CONCLUDED'
+                    }
+                }));
+                alert('Referral request concluded successfully!');
+            } else {
+                const errorData = await response.json();
+                alert(errorData.error || 'Failed to conclude referral request');
+            }
+        } catch (error) {
+            console.error('Error concluding request:', error);
+            alert('Error concluding referral request');
+        } finally {
+            setConcluding(false);
+        }
+    };
+
     if(loading){
         return (
             <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 text-white pt-20">
@@ -245,6 +283,30 @@ export default function chatPage(){
                                 </Button>
                             </div>
                         </div>
+
+                        {/* Add Conclude Request Button */}
+                        {chatData?.referralRequest?.status === 'PENDING' && (
+                            <div className="mt-4 flex justify-center">
+                                <Button
+                                    onClick={handleConcludeRequest}
+                                    disabled={concluding}
+                                    className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg flex items-center space-x-2"
+                                >
+                                    <CheckCircle className="w-4 h-4" />
+                                    <span>{concluding ? 'Concluding...' : 'Conclude Request'}</span>
+                                </Button>
+                            </div>
+                        )}
+                        
+                        {/* Show status if concluded */}
+                        {chatData?.referralRequest?.status === 'CONCLUDED' && (
+                            <div className="mt-4 flex justify-center">
+                                <div className="bg-green-600/20 border border-green-500/30 rounded-lg px-4 py-2 flex items-center space-x-2">
+                                    <CheckCircle className="w-4 h-4 text-green-400" />
+                                    <span className="text-green-400 text-sm">Request Concluded</span>
+                                </div>
+                            </div>
+                        )}
                     </div>
 
                     {/* Modern Messages Container */}
