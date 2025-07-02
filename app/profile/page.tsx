@@ -5,8 +5,7 @@ import { Skeleton } from "@/components/ui/skeleton"
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-
-//todo - add two sections: Pending requests, Concluded requests. (each show chats with other peole with the corresponding status of the request object)
+import UserRequests from "@/components/user_requests";
 
 export default function ProfilePage() {
   const { data: session, status } = useSession();
@@ -21,12 +20,12 @@ export default function ProfilePage() {
 
   if (status === "loading") {
     return (
-      <div className="w-full min-h-screen flex items-center justify-center bg-black">
+      <div className="w-full min-h-screen flex items-center justify-center bg-black px-4">
         <div className="flex items-center space-x-4">
           <Skeleton className="h-12 w-12 rounded-full" />
           <div className="space-y-2">
-            <Skeleton className="h-4 w-[250px]" />
-            <Skeleton className="h-4 w-[200px]" />
+            <Skeleton className="h-4 w-[200px] sm:w-[250px]" />
+            <Skeleton className="h-4 w-[150px] sm:w-[200px]" />
           </div>
         </div>
       </div>
@@ -34,8 +33,13 @@ export default function ProfilePage() {
   }
 
   return (
-    <div className="w-full mt-15 min-h-screen flex flex-col items-center p-3 bg-black">
-      <UserDetails user={session?.user} />
+    <div className="w-full min-h-screen bg-black">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-8">
+        <div className="flex flex-col space-y-6 lg:space-y-8">
+          <UserDetails user={session?.user} />
+          <UserRequests />
+        </div>
+      </div>
     </div>
   );
 }

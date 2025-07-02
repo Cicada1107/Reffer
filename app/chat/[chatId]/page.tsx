@@ -162,6 +162,7 @@ export default function chatPage(){
 
             if (response.ok) {
                 // Update the local chat data to reflect the concluded status
+                //@ts-ignore
                 setChatData(prev => ({
                     ...prev,
                     referralRequest: {

@@ -61,7 +61,7 @@ export default function ResumeView({ userId, resumeUrl }: ResumeViewProps) {
   };
 
   return (
-    <div className="flex flex-col items-center gap-4 p-4 bg-white/5 rounded-lg border border-white/10">
+    <div className="flex flex-col items-center justify-center h-80 gap-4 p-4 bg-white/5 rounded-lg border border-white/10">
       <div className="text-center">
         <FileTextIcon className="w-12 h-12 text-white/60 mx-auto mb-2" />
         <h3 className="text-white font-semibold mb-1">Resume</h3>

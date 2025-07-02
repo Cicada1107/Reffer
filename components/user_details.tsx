@@ -177,12 +177,15 @@ export default function UserDetails({ user }: PersonalDetailsProps) {
 
   if (loading && !profileData.name) {
     return (
-      <div className="w-full max-w-2xl mx-auto p-6 bg-white/10 rounded-xl backdrop-blur-sm">
-        <div className="flex items-center space-x-4">
-          <Skeleton className="h-12 w-12 rounded-full" />
-          <div className="space-y-2">
-            <Skeleton className="h-4 w-[250px]" />
-            <Skeleton className="h-4 w-[200px]" />
+      <div className="w-full max-w-4xl mx-auto p-4 sm:p-6">
+        <div className="bg-white/10 rounded-xl backdrop-blur-sm p-4 sm:p-6">
+          <div className="flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-6">
+            <Skeleton className="h-24 w-24 sm:h-32 sm:w-32 rounded-full" />
+            <div className="space-y-2 text-center sm:text-left">
+              <Skeleton className="h-6 w-[200px] sm:w-[250px]" />
+              <Skeleton className="h-4 w-[150px] sm:w-[200px]" />
+              <Skeleton className="h-4 w-[100px] sm:w-[150px]" />
+            </div>
           </div>
         </div>
       </div>
@@ -190,53 +193,56 @@ export default function UserDetails({ user }: PersonalDetailsProps) {
   }
 
   return (
-    <>
-      <div className="w-full flex items-center p-2">
-        {/* Profile Picture */}
-        <div className="sm:w-1/4 w-full rounded-lg shadow-md backdrop-blur-md p-4">
-          <div className="relative">
-            <img
-              src={profileData.image || '/default-avatar.png'}
-              alt="Profile Picture"
-              className="w-60 h-60 rounded-full border-2 border-white/20 cursor-pointer hover:border-white/40 transition-colors"
-            />
-            <label className="absolute bottom-4 right-4 bg-purple-600 hover:bg-purple-700 text-white p-2 rounded-full cursor-pointer transition-colors">
-              <PencilIcon className="w-4 h-4" />
-              <input
-                type="file"
-                accept="image/*"
-                onChange={handleImageUpload}
-                className="hidden"
+    <div className="w-full max-w-6xl mx-auto space-y-6">
+      {/* Profile Header Section */}
+      <div className="flex flex-col lg:flex-row gap-6">
+        {/* Profile Picture - Transparent background */}
+        <div className="flex justify-center lg:justify-start lg:items-stretch">
+          <div className="rounded-xl p-4 sm:p-6 flex items-center justify-center lg:w-auto lg:min-w-0">
+            <div className="relative">
+              <img
+                src={profileData.image || '/default-avatar.png'}
+                alt="Profile Picture"
+                className="w-32 h-32 sm:w-40 sm:h-40 lg:w-70 lg:h-70 rounded-full border-4 border-white/20 cursor-pointer hover:border-white/40 transition-colors"
               />
-            </label>
+              <label className="absolute bottom-2 right-2 sm:bottom-4 sm:right-4 bg-purple-600 hover:bg-purple-700 text-white p-2 sm:p-3 rounded-full cursor-pointer transition-colors shadow-lg">
+                <PencilIcon className="w-4 h-4" />
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageUpload}
+                  className="hidden"
+                />
+              </label>
+            </div>
           </div>
         </div>
 
         {/* Personal Details Card */}
-        <div className="sm:w-3/4 w-full rounded-lg shadow-md backdrop-blur-md bg-white/10 border border-white/10 p-4 flex flex-col">
-          <div className="flex items-center justify-between mb-4">
-            <h1 className="text-left font-bold text-white text-2xl">Personal Details</h1>
+        <div className="flex-1 bg-white/10 backdrop-blur-md border border-white/10 rounded-xl p-4 sm:p-6 flex flex-col">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 space-y-2 sm:space-y-0">
+            <h1 className="text-xl sm:text-2xl font-bold text-white">Personal Details</h1>
             <button
               onClick={() => editingPersonal ? cancelPersonalEdit() : setEditingPersonal(true)}
-              className="text-white hover:text-purple-400 transition-colors"
+              className="text-white hover:text-purple-400 transition-colors self-start sm:self-auto"
             >
               {editingPersonal ? <XIcon className="w-5 h-5" /> : <PencilIcon className="w-5 h-5" />}
             </button>
           </div>
 
-          <div className="flex items-center justify-center w-full">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 flex-1">
             {/* Column 1 */}
-            <div className="flex flex-col gap-4 p-2 sm:w-1/2 w-full">
+            <div className="space-y-4">
               <div>
-                <label className="text-gray-300 text-sm">Name</label>
+                <label className="text-gray-300 text-sm block mb-1">Name</label>
                 <p className="text-white">{profileData.name}</p>
               </div>
               <div>
-                <label className="text-gray-300 text-sm">Email</label>
-                <p className="text-white">{profileData.email}</p>
+                <label className="text-gray-300 text-sm block mb-1">Email</label>
+                <p className="text-white break-all">{profileData.email}</p>
               </div>
               <div>
-                <label className="text-gray-300 text-sm">Phone</label>
+                <label className="text-gray-300 text-sm block mb-1">Phone</label>
                 {editingPersonal ? (
                   <Input
                     value={personalFormData.phone}
@@ -251,9 +257,9 @@ export default function UserDetails({ user }: PersonalDetailsProps) {
             </div>
 
             {/* Column 2 */}
-            <div className="flex flex-col gap-4 p-2 sm:w-1/2 w-full">
+            <div className="space-y-4">
               <div>
-                <label className="text-gray-300 text-sm">College</label>
+                <label className="text-gray-300 text-sm block mb-1">College</label>
                 {editingPersonal ? (
                   <Input
                     value={personalFormData.college}
@@ -266,7 +272,7 @@ export default function UserDetails({ user }: PersonalDetailsProps) {
                 )}
               </div>
               <div>
-                <label className="text-gray-300 text-sm">Branch</label>
+                <label className="text-gray-300 text-sm block mb-1">Branch</label>
                 {editingPersonal ? (
                   <Input
                     value={personalFormData.branch}
@@ -279,7 +285,7 @@ export default function UserDetails({ user }: PersonalDetailsProps) {
                 )}
               </div>
               <div>
-                <label className="text-gray-300 text-sm">Degree</label>
+                <label className="text-gray-300 text-sm block mb-1">Degree</label>
                 {editingPersonal ? (
                   <Input
                     value={personalFormData.degree}
@@ -295,11 +301,11 @@ export default function UserDetails({ user }: PersonalDetailsProps) {
           </div>
 
           {editingPersonal && (
-            <div className="flex gap-3 mt-4 justify-end">
+            <div className="flex flex-col sm:flex-row gap-3 mt-6 sm:justify-end">
               <Button
                 onClick={handleUpdatePersonalDetails}
                 disabled={loading}
-                className="bg-green-600 hover:bg-green-700"
+                className="bg-green-600 hover:bg-green-700 order-2 sm:order-1"
               >
                 <CheckIcon className="w-4 h-4 mr-2" />
                 {loading ? 'Saving...' : 'Save'}
@@ -307,6 +313,7 @@ export default function UserDetails({ user }: PersonalDetailsProps) {
               <Button
                 onClick={cancelPersonalEdit}
                 variant="secondary"
+                className="order-1 sm:order-2"
               >
                 Cancel
               </Button>
@@ -315,22 +322,23 @@ export default function UserDetails({ user }: PersonalDetailsProps) {
         </div>
       </div>
 
-      {/* Job Details Card */}
-      <div className="w-full flex mt-2 items-center rounded-lg shadow-md backdrop-blur-md bg-white/10 border border-white/10 p-4">
-        <div className="sm:w-3/4 w-full flex flex-col p-1">
-          <div className="flex items-center justify-between mb-4 px-2">
-            <h1 className="text-left font-bold text-white text-2xl">Job Details</h1>
+      {/* Job Details Section */}
+      <div className="flex flex-col xl:flex-row gap-6 xl:items-stretch">
+        {/* Job Details Card */}
+        <div className="flex-1 bg-white/10 backdrop-blur-md border border-white/10 rounded-xl p-4 sm:p-6 flex flex-col">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 space-y-2 sm:space-y-0">
+            <h1 className="text-xl sm:text-2xl font-bold text-white">Job Details</h1>
             <button
               onClick={() => editingJob ? cancelJobEdit() : setEditingJob(true)}
-              className="text-white hover:text-purple-400 transition-colors"
+              className="text-white hover:text-purple-400 transition-colors self-start sm:self-auto"
             >
               {editingJob ? <XIcon className="w-5 h-5" /> : <PencilIcon className="w-5 h-5" />}
             </button>
           </div>
 
-          <div className="space-y-4">
+          <div className="space-y-4 flex-1">
             <div>
-              <label className="text-gray-300 text-sm">Current Company</label>
+              <label className="text-gray-300 text-sm block mb-1">Current Company</label>
               {editingJob ? (
                 <Input
                   value={jobFormData.company}
@@ -343,7 +351,7 @@ export default function UserDetails({ user }: PersonalDetailsProps) {
               )}
             </div>
             <div>
-              <label className="text-gray-300 text-sm">Current Role</label>
+              <label className="text-gray-300 text-sm block mb-1">Current Role</label>
               {editingJob ? (
                 <Input
                   value={jobFormData.role}
@@ -356,7 +364,7 @@ export default function UserDetails({ user }: PersonalDetailsProps) {
               )}
             </div>
             <div>
-              <label className="text-gray-300 text-sm">LinkedIn Profile</label>
+              <label className="text-gray-300 text-sm block mb-1">LinkedIn Profile</label>
               {editingJob ? (
                 <Input
                   value={jobFormData.linkedin}
@@ -365,7 +373,7 @@ export default function UserDetails({ user }: PersonalDetailsProps) {
                   className="bg-black/50 border-white/20 text-white"
                 />
               ) : (
-                <p className="text-white">
+                <p className="text-white break-all">
                   {profileData.linkedin ? (
                     <a 
                       href={profileData.linkedin} 
@@ -384,11 +392,11 @@ export default function UserDetails({ user }: PersonalDetailsProps) {
           </div>
 
           {editingJob && (
-            <div className="flex gap-3 mt-4 justify-end">
+            <div className="flex flex-col sm:flex-row gap-3 mt-6 sm:justify-end">
               <Button
                 onClick={handleUpdateJobDetails}
                 disabled={loading}
-                className="bg-green-600 hover:bg-green-700"
+                className="bg-green-600 hover:bg-green-700 order-2 sm:order-1"
               >
                 <CheckIcon className="w-4 h-4 mr-2" />
                 {loading ? 'Saving...' : 'Save'}
@@ -396,6 +404,7 @@ export default function UserDetails({ user }: PersonalDetailsProps) {
               <Button
                 onClick={cancelJobEdit}
                 variant="secondary"
+                className="order-1 sm:order-2"
               >
                 Cancel
               </Button>
@@ -403,10 +412,13 @@ export default function UserDetails({ user }: PersonalDetailsProps) {
           )}
         </div>
 
-        <div className="sm:w-1/4 w-full">
-          <ResumeView userId={user.id} resumeUrl={profileData.resumeUrl} />
+        {/* Resume Section*/}
+        <div className="xl:w-80 xl:flex xl:flex-col">
+          <div className="flex-1">
+            <ResumeView userId={user.id} resumeUrl={profileData.resumeUrl} />
+          </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
