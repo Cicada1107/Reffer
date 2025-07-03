@@ -4,10 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "prisma generate && next build",
     "start": "next start",
     "lint": "next lint",
-    "test-db": "tsx lib/test-db.ts"
+    "test-db": "tsx lib/test-db.ts",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@lottiefiles/dotlottie-react": "^0.14.2",
