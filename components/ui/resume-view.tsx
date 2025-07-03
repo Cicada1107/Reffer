@@ -1,17 +1,23 @@
 'use client'
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from './button';
 import { UploadIcon, FileTextIcon, EyeIcon } from 'lucide-react';
 
 interface ResumeViewProps {
   userId: string;
   resumeUrl?: string;
+  onResumeUpload?: (resumeUrl: string) => void;
 }
 
-export default function ResumeView({ userId, resumeUrl }: ResumeViewProps) {
+export default function ResumeView({ userId, resumeUrl, onResumeUpload }: ResumeViewProps) {
   const [uploading, setUploading] = useState(false);
   const [currentResumeUrl, setCurrentResumeUrl] = useState(resumeUrl);
+
+  // Sync with parent state when resumeUrl prop changes
+  useEffect(() => {
+    setCurrentResumeUrl(resumeUrl);
+  }, [resumeUrl]);
 
   const handleResumeUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -43,6 +49,10 @@ export default function ResumeView({ userId, resumeUrl }: ResumeViewProps) {
       if (response.ok) {
         const data = await response.json();
         setCurrentResumeUrl(data.resumeUrl);
+        // Call the callback to update parent component
+        if (onResumeUpload) {
+          onResumeUpload(data.resumeUrl);
+        }
       } else {
         alert('Failed to upload resume');
       }

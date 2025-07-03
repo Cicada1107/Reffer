@@ -219,37 +219,37 @@ export default function chatPage(){
                 <div className="bg-gray-900/50 backdrop-blur-xl border border-gray-800/50 rounded-2xl h-full flex flex-col shadow-2xl overflow-hidden">
                     
                     {/* Modern Chat Header */}
-                    <div className="p-6 border-b border-gray-800/50 bg-gradient-to-r from-gray-800/30 to-gray-900/30">
+                    <div className="p-4 sm:p-6 border-b border-gray-800/50 bg-gradient-to-r from-gray-800/30 to-gray-900/30">
                         <div className="flex items-center justify-between">
-                            <div className="flex items-center space-x-4">
+                            <div className="flex items-center space-x-2 sm:space-x-4 min-w-0 flex-1">
                                 <Button
                                     variant="ghost"
                                     size="icon"
                                     onClick={() => router.back()}
-                                    className="text-gray-400 hover:text-white hover:bg-gray-800/50 rounded-full"
+                                    className="text-gray-400 hover:text-white hover:bg-gray-800/50 rounded-full flex-shrink-0"
                                 >
                                     <ArrowLeft className="w-5 h-5" />
                                 </Button>
                                 
-                                <div className="flex items-center space-x-3">
-                                    <div className="relative group" onClick={handleProfileClick}>
+                                <div className="flex items-center space-x-2 sm:space-x-3 min-w-0 flex-1">
+                                    <div className="relative group flex-shrink-0" onClick={handleProfileClick}>
                                         <img
                                             src={otherParticipant?.image || '/default-avatar.png'}
                                             alt={otherParticipant?.name || 'User'}
-                                            className="w-12 h-12 rounded-full border-2 border-purple-500/30 shadow-lg cursor-pointer hover:border-purple-500/60 transition-colors"
+                                            className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border-2 border-purple-500/30 shadow-lg cursor-pointer hover:border-purple-500/60 transition-colors"
                                             title="View profile"
                                         />
-                                        <div className="absolute bottom-0 right-0 w-3 h-3 bg-green-400 rounded-full border-2 border-gray-900"></div>
+                                        <div className="absolute bottom-0 right-0 w-2.5 h-2.5 sm:w-3 sm:h-3 bg-green-400 rounded-full border-2 border-gray-900"></div>
                                         <div className="absolute inset-0 bg-black/50 rounded-full opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
-                                            <User className="w-4 h-4 text-white" />
+                                            <User className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
                                         </div>
                                     </div>
                                     
-                                    <div>
-                                        <h2 className="text-lg font-semibold text-white">
+                                    <div className="min-w-0 flex-1">
+                                        <h2 className="text-base sm:text-lg font-semibold text-white truncate">
                                             {otherParticipant?.name || 'Chat Partner'}
                                         </h2>
-                                        <p className="text-sm text-gray-400">
+                                        <p className="text-xs sm:text-sm text-gray-400 truncate">
                                             {otherParticipant?.role && otherParticipant?.company 
                                                 ? `${otherParticipant.role} at ${otherParticipant.company}`
                                                 : 'Online'
@@ -259,38 +259,38 @@ export default function chatPage(){
                                 </div>
                             </div>
 
-                            <div className="flex items-center space-x-2">
+                            <div className="flex items-center space-x-1 sm:space-x-2 flex-shrink-0">
                                 <Button
                                     variant="ghost"
                                     size="icon"
-                                    className="text-gray-400 hover:text-white hover:bg-gray-800/50 rounded-full"
+                                    className="text-gray-400 hover:text-white hover:bg-gray-800/50 rounded-full w-8 h-8 sm:w-10 sm:h-10"
                                 >
-                                    <Phone className="w-5 h-5" />
+                                    <Phone className="w-4 h-4 sm:w-5 sm:h-5" />
                                 </Button>
                                 <Button
                                     variant="ghost"
                                     size="icon"
-                                    className="text-gray-400 hover:text-white hover:bg-gray-800/50 rounded-full"
+                                    className="text-gray-400 hover:text-white hover:bg-gray-800/50 rounded-full w-8 h-8 sm:w-10 sm:h-10"
                                 >
-                                    <Video className="w-5 h-5" />
+                                    <Video className="w-4 h-4 sm:w-5 sm:h-5" />
                                 </Button>
                                 <Button
                                     variant="ghost"
                                     size="icon"
-                                    className="text-gray-400 hover:text-white hover:bg-gray-800/50 rounded-full"
+                                    className="text-gray-400 hover:text-white hover:bg-gray-800/50 rounded-full w-8 h-8 sm:w-10 sm:h-10"
                                 >
-                                    <MoreVertical className="w-5 h-5" />
+                                    <MoreVertical className="w-4 h-4 sm:w-5 sm:h-5" />
                                 </Button>
                             </div>
                         </div>
 
                         {/* Add Conclude Request Button */}
                         {chatData?.referralRequest?.status === 'PENDING' && (
-                            <div className="mt-4 flex justify-center">
+                            <div className="mt-3 sm:mt-4 flex justify-center">
                                 <Button
                                     onClick={handleConcludeRequest}
                                     disabled={concluding}
-                                    className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg flex items-center space-x-2"
+                                    className="bg-green-600 hover:bg-green-700 text-white px-4 sm:px-6 py-2 rounded-lg flex items-center space-x-2 text-sm"
                                 >
                                     <CheckCircle className="w-4 h-4" />
                                     <span>{concluding ? 'Concluding...' : 'Conclude Request'}</span>
@@ -300,8 +300,8 @@ export default function chatPage(){
                         
                         {/* Show status if concluded */}
                         {chatData?.referralRequest?.status === 'CONCLUDED' && (
-                            <div className="mt-4 flex justify-center">
-                                <div className="bg-green-600/20 border border-green-500/30 rounded-lg px-4 py-2 flex items-center space-x-2">
+                            <div className="mt-3 sm:mt-4 flex justify-center">
+                                <div className="bg-green-600/20 border border-green-500/30 rounded-lg px-3 sm:px-4 py-2 flex items-center space-x-2">
                                     <CheckCircle className="w-4 h-4 text-green-400" />
                                     <span className="text-green-400 text-sm">Request Concluded</span>
                                 </div>

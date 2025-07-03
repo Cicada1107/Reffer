@@ -4,6 +4,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { useSession, signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import ProfileImage from "@/components/ui/profile-image";
 
 interface SentRequest {
   id: string;
@@ -145,8 +146,8 @@ export default function userSentRequests() {
                 <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4">
                   {/* Left: Avatar + Info */}
                   <div className="flex gap-4 items-start flex-1">
-                    <img
-                      src={request.employee.image || "/default-avatar.png"}
+                    <ProfileImage
+                      src={request.employee.image}
                       alt={request.employee.name}
                       className="w-12 h-12 rounded-full border border-white/20 object-cover"
                     />
@@ -180,7 +181,7 @@ export default function userSentRequests() {
 
                     {request.chat && (
                       <button
-                      //@ts-ignore
+                        //@ts-ignore
                         onClick={() => router.push(`/chat/${request.chat.id}`)}
                         className="text-sm border border-blue-500 text-blue-400 hover:bg-blue-500 hover:text-white transition-colors px-3 py-1 rounded-lg"
                       >

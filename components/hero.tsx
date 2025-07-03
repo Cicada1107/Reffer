@@ -1,7 +1,20 @@
+'use client'
+import { signIn, useSession } from "next-auth/react"
 import { Button } from "./ui/button"
 import Link from "next/link"
+import { useRouter } from "next/navigation";
 
 export function Hero() {
+
+    const { data: session, status } = useSession();
+    const router = useRouter();
+
+    const handleClick = () => {
+        if(!session) signIn('google');
+        else router.push("/profile");
+        return;
+    }
+
     return (
         <div className="pt-40 text-center space-y-5 max-w-2xl z-10">
             <p className="py-1 px-2 bg-zinc-900/40 backdrop-blur-sm font-light rounded-full text-white inline-block">Reffer</p>
@@ -15,9 +28,7 @@ export function Hero() {
             </p>
 
             <div className="space-x-3">
-                <Link href="/search">
-                    <Button variant="default" className="rounded-lg">Start Now</Button>
-                </Link>
+                <Button variant="default" className="rounded-lg" onClick={handleClick}>Start Now</Button>
                 <Link href="/search">
                     <Button variant="secondary" className="rounded-lg">Search Referrals</Button>
                 </Link>

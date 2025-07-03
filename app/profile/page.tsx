@@ -2,7 +2,7 @@
 
 import UserDetails from "@/components/user_details";
 import { Skeleton } from "@/components/ui/skeleton"
-import { useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import UserRequests from "@/components/user_requests";
@@ -14,7 +14,7 @@ export default function ProfilePage() {
   useEffect(() => {
     if (status === "loading") return;
     if (!session) {
-      router.push('/');
+      signIn('google');
     }
   }, [session, status, router]);
 
@@ -36,7 +36,7 @@ export default function ProfilePage() {
     <div className="w-full min-h-screen bg-black">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-8">
         <div className="flex flex-col space-y-6 lg:space-y-8">
-          <UserDetails user={session?.user} />
+          {session?.user && <UserDetails user={session.user} />}
           <UserRequests />
         </div>
       </div>

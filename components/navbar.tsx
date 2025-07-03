@@ -71,20 +71,22 @@ export default function Navbar() {
                     className="w-10 h-10 rounded-full border-2 border-white/20 cursor-pointer hover:border-white/40 transition-colors"
                     onClick={handleProfileClick}
                   />
-                  <div className="absolute right-0 top-full mt-2 bg-black/90 backdrop-blur-md border border-white/10 rounded-lg p-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none group-hover:pointer-events-auto">
-                    <div className="flex flex-col gap-2 min-w-[120px]">
-                      <button
-                        onClick={handleProfileClick}
-                        className="text-white text-sm hover:text-gray-300 transition-colors px-3 py-1 text-left"
-                      >
-                        View Profile
-                      </button>
-                      <button
-                        onClick={handleSignOut}
-                        className="text-red-400 text-sm hover:text-red-300 transition-colors px-3 py-1 text-left"
-                      >
-                        Sign Out
-                      </button>
+                  <div className="absolute right-0 top-full pt-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none group-hover:pointer-events-auto">
+                    <div className="bg-black/90 backdrop-blur-md border border-white/10 rounded-lg p-2">
+                      <div className="flex flex-col gap-2 min-w-[120px]">
+                        <button
+                          onClick={handleProfileClick}
+                          className="text-white text-sm hover:text-gray-300 transition-colors px-3 py-1 text-left"
+                        >
+                          View Profile
+                        </button>
+                        <button
+                          onClick={handleSignOut}
+                          className="text-red-400 text-sm hover:text-red-300 transition-colors px-3 py-1 text-left"
+                        >
+                          Sign Out
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>

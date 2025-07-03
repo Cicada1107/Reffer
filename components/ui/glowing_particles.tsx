@@ -1,9 +1,16 @@
 "use client";
 import { useEffect, useRef } from "react";
 import { Button } from "./button";
+import { useRouter } from "next/navigation";
 
-const GlowingParticlesSection = () => {
+export default function GlowingParticlesSection(){
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const router = useRouter();
+
+  const handleTryClick = () => {
+    router.push('/search');
+    return;
+  }
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -66,11 +73,9 @@ const GlowingParticlesSection = () => {
           <p className="text-gray-300">
             Time is a luxury. Spend it where it matters.
           </p>
-          <Button variant={"secondary"}>Try It Now</Button>
+          <Button variant={"secondary"} onClick={handleTryClick}>Try It Now</Button>
         </div>
       </div>
     </div>
   );
 };
-
-export default GlowingParticlesSection;

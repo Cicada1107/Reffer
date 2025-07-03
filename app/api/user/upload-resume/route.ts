@@ -54,7 +54,7 @@ export async function POST(request: NextRequest) {
           else resolve(result);
         }
       ).end(buffer);
-    })
+    });
 
     const resumeUrl = (uploadResult as any).secure_url;
 

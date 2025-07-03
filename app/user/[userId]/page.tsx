@@ -2,11 +2,10 @@
 
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
+import ProfileImage from "@/components/ui/profile-image";
 import { ArrowLeft, Briefcase, Building, ExternalLink, FileText, Mail, MapPin } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-
-
 
 //The type for the part of the profile that we will display publically - to not use sensitive info
 interface PublicUserProfile {
@@ -53,7 +52,7 @@ export default function UserProfilePage(){
       }
     };
 
-        if (userId) {
+    if (userId) {
       fetchUserProfile();
     }
   }, [userId]);
@@ -116,28 +115,32 @@ export default function UserProfilePage(){
         {/* Profile Card */}
         <div className="bg-white/10 backdrop-blur-md border border-white/10 rounded-lg p-6 mb-6">
           {/* Profile Header */}
-          <div className="flex items-center space-x-6 mb-6">
-            <img
-              src={profile.image || '/default-avatar.png'}
+          <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-6 mb-6">
+            <ProfileImage
+              src={profile.image}
               alt={profile.name}
-              className="w-24 h-24 rounded-full border-2 border-purple-500/30 shadow-lg"
+              className="w-30 h-30 rounded-full border-2 border-purple-500/30 shadow-lg mb-4 sm:mb-0"
+              title={profile.name}
             />
-            <div>
-              <h2 className="text-3xl font-bold text-white mb-2">{profile.name}</h2>
-              <div className="flex items-center text-gray-400 mb-2">
-                <Mail className="w-4 h-4 mr-2" />
-                <a href={`mailto:${profile.email}`} className="hover:text-white transition-colors">
+            <div className="min-w-0 flex-1">
+              <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2">{profile.name}</h2>
+              <div className="flex items-center text-gray-400 mb-2 min-w-0">
+                <Mail className="w-4 h-4 mr-2 flex-shrink-0" />
+                <a 
+                  href={`mailto:${profile.email}`} 
+                  className="hover:text-white transition-colors truncate"
+                >
                   {profile.email}
                 </a>
               </div>
               {profile.linkedin && (
-                <div className="flex items-center text-gray-400">
-                  <ExternalLink className="w-4 h-4 mr-2" />
+                <div className="flex items-center text-gray-400 min-w-0">
+                  <ExternalLink className="w-4 h-4 mr-2 flex-shrink-0" />
                   <a
                     href={profile.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hover:text-blue-400 transition-colors"
+                    className="hover:text-blue-400 transition-colors truncate"
                   >
                     LinkedIn Profile
                   </a>

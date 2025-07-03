@@ -157,6 +157,11 @@ export default function UserDetails({ user }: PersonalDetailsProps) {
     }
   };
 
+  // Add a function to handle resume upload
+  const handleResumeUpload = (resumeUrl: string) => {
+    setProfileData(prev => ({ ...prev, resumeUrl }));
+  };
+
   const cancelPersonalEdit = () => {
     setPersonalFormData({
       phone: profileData.phone || '',
@@ -222,11 +227,11 @@ export default function UserDetails({ user }: PersonalDetailsProps) {
 
         {/* Personal Details Card */}
         <div className="flex-1 bg-white/10 backdrop-blur-md border border-white/10 rounded-xl p-4 sm:p-6 flex flex-col">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 space-y-2 sm:space-y-0">
+          <div className="flex items-center justify-between mb-6">
             <h1 className="text-xl sm:text-2xl font-bold text-white">Personal Details</h1>
             <button
               onClick={() => editingPersonal ? cancelPersonalEdit() : setEditingPersonal(true)}
-              className="text-white hover:text-purple-400 transition-colors self-start sm:self-auto"
+              className="text-white hover:text-purple-400 transition-colors"
             >
               {editingPersonal ? <XIcon className="w-5 h-5" /> : <PencilIcon className="w-5 h-5" />}
             </button>
@@ -328,11 +333,11 @@ export default function UserDetails({ user }: PersonalDetailsProps) {
       <div className="flex flex-col xl:flex-row gap-6 xl:items-stretch">
         {/* Job Details Card */}
         <div className="flex-1 bg-white/10 backdrop-blur-md border border-white/10 rounded-xl p-4 sm:p-6 flex flex-col">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 space-y-2 sm:space-y-0">
+          <div className="flex items-center justify-between mb-6">
             <h1 className="text-xl sm:text-2xl font-bold text-white">Job Details</h1>
             <button
               onClick={() => editingJob ? cancelJobEdit() : setEditingJob(true)}
-              className="text-white hover:text-purple-400 transition-colors self-start sm:self-auto"
+              className="text-white hover:text-purple-400 transition-colors"
             >
               {editingJob ? <XIcon className="w-5 h-5" /> : <PencilIcon className="w-5 h-5" />}
             </button>
@@ -417,7 +422,11 @@ export default function UserDetails({ user }: PersonalDetailsProps) {
         {/* Resume Section*/}
         <div className="xl:w-80 xl:flex xl:flex-col">
           <div className="flex-1">
-            <ResumeView userId={user.id} resumeUrl={profileData.resumeUrl} />
+            <ResumeView 
+              userId={user.id} 
+              resumeUrl={profileData.resumeUrl} 
+              onResumeUpload={handleResumeUpload}
+            />
           </div>
         </div>
       </div>
