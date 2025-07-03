@@ -7,6 +7,7 @@ import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { PencilIcon, CheckIcon, XIcon } from "lucide-react";
 import ResumeView from "./ui/resume-view";
+import ProfileImage from "./ui/profile-image";
 
 interface UserProfile {
   id: string;
@@ -196,14 +197,15 @@ export default function UserDetails({ user }: PersonalDetailsProps) {
     <div className="w-full max-w-6xl mx-auto space-y-6">
       {/* Profile Header Section */}
       <div className="flex flex-col lg:flex-row gap-6">
-        {/* Profile Picture - Transparent background */}
+        {/* Profile Picture */}
         <div className="flex justify-center lg:justify-start lg:items-stretch">
           <div className="rounded-xl p-4 sm:p-6 flex items-center justify-center lg:w-auto lg:min-w-0">
             <div className="relative">
-              <img
-                src={profileData.image || '/default-avatar.png'}
-                alt="Profile Picture"
+              <ProfileImage
+                src={profileData.image}
+                alt={profileData.name || 'Profile Picture'}
                 className="w-32 h-32 sm:w-40 sm:h-40 lg:w-70 lg:h-70 rounded-full border-4 border-white/20 cursor-pointer hover:border-white/40 transition-colors"
+                fallbackClassName="w-32 h-32 sm:w-40 sm:h-40 lg:w-70 lg:h-70 rounded-full border-4 border-white/20 cursor-pointer hover:border-white/40 transition-colors text-2xl sm:text-3xl lg:text-4xl"
               />
               <label className="absolute bottom-2 right-2 sm:bottom-4 sm:right-4 bg-purple-600 hover:bg-purple-700 text-white p-2 sm:p-3 rounded-full cursor-pointer transition-colors shadow-lg">
                 <PencilIcon className="w-4 h-4" />

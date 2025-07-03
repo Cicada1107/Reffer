@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { Skeleton } from "./ui/skeleton";
 import { CheckCircle, Clock, MessageCircle, User } from "lucide-react";
 import { Button } from "./ui/button";
+import ProfileImage from "./ui/profile-image"; // Add this import
 
 interface UserProfile {
   id: string;
@@ -104,15 +105,15 @@ export default function UserRequests() {
   //define a re-usable user-card component right here (we can't use the old one (search vala) because it has diff logic)
   const RequestCard = ({ request }: { request: ReferralRequestWithUser }) => (
     <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-4 hover:bg-white/10 transition-all duration-200 group">
-      {/* Profile Section */}
+      {/* Profile Section - Updated to use ProfileImage component */}
       <div className="flex items-center space-x-3 mb-4">
         <div 
           className="relative group cursor-pointer flex-shrink-0"
           onClick={() => handleProfileClick(request.employee.id)}
           title="View profile"
         >
-          <img
-            src={request.employee.image || '/default-avatar.png'}
+          <ProfileImage
+            src={request.employee.image}
             alt={request.employee.name}
             className="w-12 h-12 rounded-full border-2 border-white/20 hover:border-purple-500/50 transition-colors"
           />

@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import Hamburger from "./ui/hamburger";
 import { Button } from "./ui/button";
 import { Sidebar } from "./ui/sidebar";
+import ProfileImage from "./ui/profile-image";
 
 export default function Navbar() {
   const [sideBarOpen, setSidebarOpen] = useState(false);
@@ -64,8 +65,8 @@ export default function Navbar() {
             ) : session ? (
               <div className="flex items-center gap-3">
                 <div className="relative group">
-                  <img
-                    src={session.user?.image || '/default-avatar.png'}
+                  <ProfileImage
+                    src={session.user?.image}
                     alt="Profile"
                     className="w-10 h-10 rounded-full border-2 border-white/20 cursor-pointer hover:border-white/40 transition-colors"
                     onClick={handleProfileClick}

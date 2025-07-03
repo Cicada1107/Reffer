@@ -232,16 +232,15 @@ export default function chatPage(){
                                 </Button>
                                 
                                 <div className="flex items-center space-x-3">
-                                    <div className="relative group">
+                                    <div className="relative group" onClick={handleProfileClick}>
                                         <img
                                             src={otherParticipant?.image || '/default-avatar.png'}
                                             alt={otherParticipant?.name || 'User'}
                                             className="w-12 h-12 rounded-full border-2 border-purple-500/30 shadow-lg cursor-pointer hover:border-purple-500/60 transition-colors"
-                                            onClick={handleProfileClick}
                                             title="View profile"
                                         />
                                         <div className="absolute bottom-0 right-0 w-3 h-3 bg-green-400 rounded-full border-2 border-gray-900"></div>
-                                        <div className="absolute inset-0 bg-black/50 rounded-full opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                        <div className="absolute inset-0 bg-black/50 rounded-full opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
                                             <User className="w-4 h-4 text-white" />
                                         </div>
                                     </div>
@@ -335,15 +334,14 @@ export default function chatPage(){
                                         {/* Avatar */}
                                         <div className="flex-shrink-0">
                                             {showAvatar ? (
-                                                <div className="relative group">
+                                                <div className="relative group" onClick={() => router.push(`/user/${message.sender.id}`)}>
                                                     <img
                                                         src={message.sender.image || '/default-avatar.png'}
                                                         alt={message.sender.name}
                                                         className="w-8 h-8 rounded-full border border-gray-700 cursor-pointer hover:border-purple-500/50 transition-colors"
-                                                        onClick={() => router.push(`/user/${message.sender.id}`)}
                                                         title="View profile"
                                                     />
-                                                    <div className="absolute inset-0 bg-black/50 rounded-full opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                                    <div className="absolute inset-0 bg-black/50 rounded-full opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
                                                         <User className="w-3 h-3 text-white" />
                                                     </div>
                                                 </div>

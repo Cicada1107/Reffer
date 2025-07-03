@@ -180,6 +180,7 @@ export default function userReceivedRequests() {
 
                     {request.chat && (
                       <button
+                      //@ts-ignore
                         onClick={() => router.push(`/chat/${request.chat.id}`)}
                         className="text-sm border border-blue-500 text-blue-400 hover:bg-blue-500 hover:text-white transition-colors px-3 py-1 rounded-lg"
                       >

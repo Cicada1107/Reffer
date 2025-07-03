@@ -5,6 +5,7 @@ import { Button } from './button';
 import { MapPin, Building, Briefcase, MessageCircle, Send, User } from 'lucide-react';
 import { UserProfile } from '@/lib/types';
 import { useRouter } from 'next/navigation';
+import ProfileImage from './profile-image';
 
 interface UserCardProps {
   user: UserProfile;
@@ -62,15 +63,14 @@ export default function UserCard({ user, jobId }: UserCardProps) {
 
   return (
     <div className="bg-white/10 backdrop-blur-md border border-white/10 rounded-lg p-6 hover:bg-white/15 transition-colors">
-      {/* Profile Section */}
       <div className="flex items-center space-x-4 mb-4 ">
         <div 
           className="relative group cursor-pointer"
           onClick={handleProfileClick}
           title="View profile"
         >
-          <img
-            src={user.image || '/default-avatar.png'}
+          <ProfileImage
+            src={user.image}
             alt={user.name || 'User'}
             className="w-16 h-16 rounded-full border-2 border-white/20 hover:border-purple-500/50 transition-colors"
           />
