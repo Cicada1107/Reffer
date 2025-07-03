@@ -13,8 +13,8 @@ export default function Footer() {
 
           {/* Links */}
           <nav className="flex gap-6 text-sm font-medium">
-            <a href="#" className="hover:text-gray-400">
-              Request a feature
+            <a href="https://github.com/Cicada1107/Reffer" className="hover:text-gray-400">
+              Star or Request a feature
             </a>
             <a href="#" className="hover:text-gray-400">
               Support this Website ❤️

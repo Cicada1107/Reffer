@@ -34,9 +34,9 @@ export function Sidebar({ onClose }: { onClose: () => void }) {
 
     return <div className="h-screen bg-black/20 backdrop-blur-md border-r border-white/10 w-72 flex flex-col justify-between fixed left-0 top-0 py-4 px-2">
         <div ref={sidebarRef} className="flex flex-col items-center justify-center gap-3">
-            <SidebarItem text="Search" icon={<SearchIcon/>} link="#" />
-            <SidebarItem text="Sent Requests" icon={<SentReqIcon/>} link="#"/>
-            <SidebarItem text="Received Requests" icon={<ReceivedReqIcon/>} link="#"/>
+            <SidebarItem text="Search" icon={<SearchIcon/>} link="/search" />
+            <SidebarItem text="Sent Requests" icon={<SentReqIcon/>} link="/requests/sent"/>
+            <SidebarItem text="Received Requests" icon={<ReceivedReqIcon/>} link="/requests/received"/>
         </div>
         <div className="flex flex-col items-center justify-center gap-1">
             <SidebarItem text="Support Website" icon={<RupeeIcon/>} link="#"/>
