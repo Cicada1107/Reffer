@@ -94,6 +94,8 @@ model ReferralRequest {
   requester      User @relation("RequestsSent", fields: [requesterId], references: [id])
   employee       User @relation("RequestsReceived", fields: [employeeId], references: [id])
 
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 }
 
 model Chat {

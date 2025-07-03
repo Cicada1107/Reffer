@@ -64,6 +64,8 @@ CREATE TABLE "ReferralRequest" (
     "employeeId" TEXT NOT NULL,
     "jobID" TEXT NOT NULL,
     "status" "RequestStatus" NOT NULL DEFAULT 'PENDING',
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "ReferralRequest_pkey" PRIMARY KEY ("id")
 );
