@@ -92,12 +92,12 @@ export default function Navbar() {
                 </div>
               </div>
             ) : (
-              <Button
+              <button
                 onClick={handleSignIn}
-                variant="secondary"
+                className="px-4 py-2 rounded-full bg-gradient-to-r from-blue-500/20 to-purple-500/20 hover:from-blue-500/30 hover:to-purple-500/30 border border-white/20 hover:border-white/40 text-white text-sm font-medium transition-all duration-300 backdrop-blur-sm"
               >
                 Sign In
-              </Button>
+              </button>
             )}
           </div>
         </div>
