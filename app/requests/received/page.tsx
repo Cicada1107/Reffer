@@ -103,7 +103,7 @@ export default function userReceivedRequests() {
 
   if (error) {
     return (
-      <div className="w-full min-h-screen bg-black pt-20 pb-8 flex items-center justify-center">
+      <div className="w-full min-h-scree pt-20 pb-8 flex items-center justify-center bg-gradient-to-br from-black via-gray-900 to-black relative before:absolute before:inset-0 before:bg-gradient-to-t before:from-purple-900/20 before:via-transparent before:to-purple-800/10 before:pointer-events-none">
         <div className="text-center">
           <h2 className="text-white text-xl mb-2">Error Loading Requests</h2>
           <p className="text-red-400">{error}</p>
@@ -119,7 +119,7 @@ export default function userReceivedRequests() {
   }
 
   return (
-    <div className="w-full min-h-screen bg-black pt-20 pb-8">
+    <div className="w-full min-h-screen pt-20 pb-8 bg-gradient-to-br from-black via-gray-900 to-black relative before:absolute before:inset-0 before:bg-gradient-to-t before:from-purple-900/20 before:via-transparent before:to-purple-800/10 before:pointer-events-none">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-white mb-2">Received Requests</h1>

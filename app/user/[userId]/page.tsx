@@ -84,7 +84,7 @@ export default function UserProfilePage(){
 
   if(error || !profile){
     return (
-      <div className="min-h-screen bg-black text-white pt-20 px-4">
+      <div className="min-h-screen text-white pt-20 px-4 bg-gradient-to-br from-black via-gray-900 to-black relative before:absolute before:inset-0 before:bg-gradient-to-t before:from-purple-900/20 before:via-transparent before:to-purple-800/10 before:pointer-events-none">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-2xl font-bold mb-4">Profile Not Found</h1>
           <p className="text-gray-400 mb-6">{error || 'The user profile you requested could not be found.'}</p>
@@ -97,7 +97,7 @@ export default function UserProfilePage(){
   }
 
   return (
-    <div className="min-h-screen bg-black text-white pt-20 px-4">
+    <div className="min-h-screen text-white pt-20 px-4 bg-gradient-to-br from-black via-gray-900 to-black relative before:absolute before:inset-0 before:bg-gradient-to-t before:from-purple-900/20 before:via-transparent before:to-purple-800/10 before:pointer-events-none">
       <div className="max-w-4xl mx-auto">
         {/* Header with back button */}
         <div className="flex items-center mb-6">

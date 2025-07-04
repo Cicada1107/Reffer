@@ -39,7 +39,7 @@ export default function ProfilePage() {
   }
 
   return (
-    <div className="w-full min-h-screen bg-black">
+    <div className="w-full min-h-screen bg-gradient-to-br from-black via-gray-900 to-black relative before:absolute before:inset-0 before:bg-gradient-to-t before:from-purple-900/20 before:via-transparent before:to-purple-800/10 before:pointer-events-none">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-8">
         <div className="flex flex-col space-y-6 lg:space-y-8">
           {session?.user && <UserDetails user={session.user} />}
