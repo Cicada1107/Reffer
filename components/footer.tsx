@@ -21,7 +21,9 @@ export default function Footer() {
                 <Image
                   src="/logo.svg" 
                   alt="Logo"
-                  className="h-10 w-10 transition-transform duration-300 group-hover:scale-110" 
+                  width={10}
+                  height={10}
+                  className="transition-transform duration-300 group-hover:scale-110" 
                 />
                 <div className="absolute inset-0 bg-blue-500/20 rounded-full blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
