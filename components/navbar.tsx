@@ -49,8 +49,8 @@ export default function Navbar() {
             <Image 
               src="/logo.svg" 
               alt="Logo" 
-              width={8} 
-              height={8} 
+              width={32} 
+              height={32}
               onClick={handleLogoClick}
               className="cursor-pointer"
             />
