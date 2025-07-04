@@ -45,7 +45,7 @@ export default function Navbar() {
           </div>
 
           {/* Logo */}
-          <div className="flex items-center gap-2 cursor-pointer">
+          <div className="flex items-center gap-2 cursor-pointer select-none">
             <Image 
               src="/logo.png" 
               alt="Logo" 
@@ -54,7 +54,7 @@ export default function Navbar() {
               onClick={handleLogoClick}
               className="cursor-pointer"
             />
-            <span onClick={handleLogoClick} className="text-white font-semibold text-lg">Reffer</span>
+            <span onClick={handleLogoClick} className="text-white font-semibold text-lg select-none">Reffer</span>
           </div>
 
           {/* Navigation */}
