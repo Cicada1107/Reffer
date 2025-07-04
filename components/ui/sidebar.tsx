@@ -15,7 +15,6 @@ export function Sidebar({ onClose }: { onClose: () => void }) {
         const handleClickOutside = (event: MouseEvent) => {
             const target = event.target as Element;
 
-            // Only close if the click is outside the entire sidebar container
             if (
                 sidebarRef.current &&
                 !sidebarRef.current.contains(target as Node)
@@ -31,12 +30,9 @@ export function Sidebar({ onClose }: { onClose: () => void }) {
     }, [onClose]);
 
     const handleSupportClick = () => {
-        console.log("Support button clicked!"); // Debug log
-        
-        // Close sidebar first
+        console.log("Support button clicked!");
         onClose();
         
-        // Small delay to allow sidebar to close, then scroll to footer
         setTimeout(() => {
             const footer = document.querySelector('footer');
             if (footer) {
@@ -45,12 +41,10 @@ export function Sidebar({ onClose }: { onClose: () => void }) {
                     block: 'center'
                 });
                 
-                // Highlight the support button in footer
                 const supportButton = footer.querySelector('#footer-support-button');
                 if (supportButton) {
                     supportButton.classList.add('animate-pulse', 'bg-white/20', 'rounded-lg', 'px-2', 'py-1');
                     
-                    // Remove highlight after 3 seconds
                     setTimeout(() => {
                         supportButton.classList.remove('animate-pulse', 'bg-white/20', 'rounded-lg', 'px-2', 'py-1');
                     }, 3000);
@@ -62,20 +56,22 @@ export function Sidebar({ onClose }: { onClose: () => void }) {
     return (
         <div 
             ref={sidebarRef}
-            className="h-screen bg-black/20 backdrop-blur-md border-r border-white/10 w-72 flex flex-col justify-between fixed left-0 top-0 py-4 px-2"
+            className="h-screen bg-black/80 backdrop-blur-md border-r border-white/20 w-72 flex flex-col justify-between fixed left-0 top-0 py-6 px-4 z-50 overflow-y-auto"
         >
-            <div className="flex flex-col items-center justify-center gap-3">
-                <SidebarItem text="Search" icon={<SearchIcon/>} link="/search" />
-                <SidebarItem text="Sent Requests" icon={<SentReqIcon/>} link="/requests/sent"/>
-                <SidebarItem text="Received Requests" icon={<ReceivedReqIcon/>} link="/requests/received"/>
+            <div className="flex flex-col items-stretch gap-3">
+                <SidebarItem text="Search" icon={<SearchIcon/>} link="/search" onClose={onClose} />
+                <SidebarItem text="Sent Requests" icon={<SentReqIcon/>} link="/requests/sent" onClose={onClose} />
+                <SidebarItem text="Received Requests" icon={<ReceivedReqIcon/>} link="/requests/received" onClose={onClose} />
             </div>
-            <div className="flex flex-col items-center justify-center gap-1">
+            
+            <div className="flex flex-col items-stretch gap-3 mt-auto">
                 <SidebarItem 
                     text="Support Website" 
                     icon={<RupeeIcon/>} 
                     onClick={handleSupportClick}
+                    onClose={onClose}
                 />
-                <SidebarItem text="Arijit Dubey" icon={<GitHubIcon/>} link="https://github.com/Cicada1107"/>
+                <SidebarItem text="Arijit Dubey" icon={<GitHubIcon/>} link="https://github.com/Cicada1107" onClose={onClose} />
             </div>
         </div>
     );
