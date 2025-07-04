@@ -19,7 +19,7 @@ export default function Footer() {
             <div className="flex items-center gap-3 group">
               <div className="relative">
                 <Image
-                  src="/logo.svg" 
+                  src="/logo.png" 
                   alt="Logo"
                   width={32}
                   height={32}

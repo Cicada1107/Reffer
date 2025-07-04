@@ -47,7 +47,7 @@ export default function Navbar() {
           {/* Logo */}
           <div className="flex items-center gap-2 cursor-pointer">
             <Image 
-              src="/logo.svg" 
+              src="/logo.png" 
               alt="Logo" 
               width={32} 
               height={32}
