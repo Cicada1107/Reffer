@@ -2,10 +2,12 @@
 
 import UserDetails from "@/components/user_details";
 import { Skeleton } from "@/components/ui/skeleton"
-import { signIn, useSession } from "next-auth/react";
+import { signIn, signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import UserRequests from "@/components/user_requests";
+import { LogOut } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export default function ProfilePage() {
   const { data: session, status } = useSession();
@@ -17,6 +19,10 @@ export default function ProfilePage() {
       signIn('google');
     }
   }, [session, status, router]);
+
+  const handleSignOut = () => {
+    signOut({ callbackUrl: '/' });
+  };
 
   if (status === "loading") {
     return (
@@ -38,6 +44,17 @@ export default function ProfilePage() {
         <div className="flex flex-col space-y-6 lg:space-y-8">
           {session?.user && <UserDetails user={session.user} />}
           <UserRequests />
+          <div className="lg:hidden flex justify-end">
+            <Button
+              onClick={handleSignOut}
+              variant="outline"
+              size="sm"
+              className="w-full border-red-500/50 text-red-400 hover:bg-red-500/10 hover:text-red-300 hover:border-red-400/70 transition-colors bg-black/50"
+            >
+              <LogOut className="w-4 h-4 mr-2" />
+              Sign Out
+            </Button>
+          </div>
         </div>
       </div>
     </div>
