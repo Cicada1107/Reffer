@@ -17,7 +17,8 @@ export default async function ioHandler(
       cors: {
         origin: [
           "http://localhost:3000",
-          "https://reffer-sigma.vercel.app"
+          "https://reffer-sigma.vercel.app",
+          "https://reffer-sigma.vercel.app/chat/cmcoftsxx000alh04m4ue5wk7"
         ],
         methods: ["GET", "POST"]
       }
