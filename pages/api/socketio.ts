@@ -16,7 +16,7 @@ export default async function ioHandler(
       path: '/api/socketio',
       cors: {
         //@ts-ignore
-        origin: "https://reffer-sigma.vercel.app",
+        origin: "*",
         methods: ["GET", "POST"]
       }
     });
