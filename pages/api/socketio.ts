@@ -15,11 +15,7 @@ export default async function ioHandler(
     const io = new ServerIO(httpServer, {
       path: '/api/socketio',
       cors: {
-        origin: [
-          "http://localhost:3000",
-          "https://reffer-sigma.vercel.app",
-          "https://reffer-sigma.vercel.app/chat/cmcoftsxx000alh04m4ue5wk7"
-        ],
+        origin: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
         methods: ["GET", "POST"]
       }
     });

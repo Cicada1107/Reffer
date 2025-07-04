@@ -82,6 +82,7 @@ export default function chatPage(){
                 const response = await fetch(`/api/chat/${chatId}`);
                 if(response.ok){
                     const data = await response.json();
+                    console.log("API Connection established");
                     setChatData(data.chat);
                     setMessages(data.messages || []);
                 }
@@ -100,6 +101,7 @@ export default function chatPage(){
     //And now FInally sending a message
     const sendMessage = async () => {
         if(!newMessage.trim() || !socket || !session?.user?.id || !chatData){
+            console.log("no message or no socket or no session user id or no chat data");
             return;
         }
 
@@ -124,6 +126,8 @@ export default function chatPage(){
             receiverId,
             content: newMessage.trim(),
         });
+
+        console.log("Sent");
 
         setNewMessage('');
     };

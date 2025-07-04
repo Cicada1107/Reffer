@@ -26,9 +26,9 @@ export default function SearchPage() {
     setLoading(true);
     try {
       const queryParams = new URLSearchParams({
-        company: searchParams.company,
-        role: searchParams.role,
-        ...(searchParams.jobId && { jobId: searchParams.jobId })
+        company: searchParams.company.trim(),
+        role: searchParams.role.trim(),
+        ...(searchParams.jobId && { jobId: searchParams.jobId.trim() })
       });
 
       const response = await fetch(`/api/search/users?${queryParams}`);
