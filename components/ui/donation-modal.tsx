@@ -61,7 +61,6 @@ export default function DonationModal({ isOpen, onClose }: DonationModalProps) {
                 className="flex items-center gap-1"
               >
                 <Copy className="w-4 h-4" />
-                {copiedUPI ? 'Copied!' : 'Copy'}
               </Button>
             </div>
           </div>

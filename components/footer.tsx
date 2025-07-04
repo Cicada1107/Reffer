@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import DonationModal from "./ui/donation-modal";
+import Image from "next/image";
 
 export default function Footer() {
   const [showDonationModal, setShowDonationModal] = useState(false);
@@ -17,9 +18,9 @@ export default function Footer() {
             {/* Logo Section */}
             <div className="flex items-center gap-3 group">
               <div className="relative">
-                <img 
+                <Image
                   src="/logo.svg" 
-                  alt="Logo" 
+                  alt="Logo"
                   className="h-10 w-10 transition-transform duration-300 group-hover:scale-110" 
                 />
                 <div className="absolute inset-0 bg-blue-500/20 rounded-full blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />

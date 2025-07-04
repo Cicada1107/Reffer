@@ -8,6 +8,7 @@ import Hamburger from "./ui/hamburger";
 import { Button } from "./ui/button";
 import { Sidebar } from "./ui/sidebar";
 import ProfileImage from "./ui/profile-image";
+import Image from "next/image";
 
 export default function Navbar() {
   const [sideBarOpen, setSidebarOpen] = useState(false);
@@ -45,7 +46,14 @@ export default function Navbar() {
 
           {/* Logo */}
           <div className="flex items-center gap-2 cursor-pointer">
-            <img src="/logo.svg" alt="Logo" className="h-8 w-8" onClick={handleLogoClick}/>
+            <Image 
+              src="/logo.svg" 
+              alt="Logo" 
+              width={8} 
+              height={8} 
+              onClick={handleLogoClick}
+              className="cursor-pointer"
+            />
             <span onClick={handleLogoClick} className="text-white font-semibold text-lg">Reffer</span>
           </div>
 
