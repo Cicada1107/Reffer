@@ -56,7 +56,7 @@ export function Sidebar({ onClose }: { onClose: () => void }) {
     return (
         <div 
             ref={sidebarRef}
-            className="h-screen bg-black/80 backdrop-blur-md border-r border-white/20 w-72 flex flex-col justify-between fixed left-0 top-0 py-6 px-4 z-50 overflow-y-auto"
+            className="h-screen bg-black/80 backdrop-blur-sm border-r border-white/20 w-72 flex flex-col justify-between fixed left-0 top-0 py-6 px-4 z-50 overflow-y-auto"
         >
             <div className="flex flex-col items-stretch gap-3">
                 <SidebarItem text="Search" icon={<SearchIcon/>} link="/search" onClose={onClose} />
