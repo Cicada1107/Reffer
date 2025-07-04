@@ -56,7 +56,7 @@ const features = [
 
 const FeatureGrid: FC = () => {
   return (
-    <div className="bg-black py-40 text-white">
+    <div className="py-40 text-white">
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
         {features.map((feature, index) => {
           const Icon = feature.icon;
