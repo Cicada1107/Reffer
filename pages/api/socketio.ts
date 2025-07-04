@@ -16,7 +16,7 @@ export default async function ioHandler(
       path: '/api/socketio',
       cors: {
         //@ts-ignore
-        origin: [process.env.NEXTAUTH_URL, "https://reffer-sigma.vercel.app", "http://localhost:3000"].filter(Boolean),
+        origin: "https://reffer-sigma.vercel.app",
         methods: ["GET", "POST"]
       }
     });
